@@ -5,6 +5,7 @@ import { CardsModule } from "./cards/cards.module";
 import { RecipientSocialModule } from "./recipient-social/recipient-social.module";
 import { SocialMediaModule } from "./social-media/social-media.module";
 import { RecipientModule } from "./recipient/recipient.module";
+import { AdminModule } from './admin/admin.module';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { RecipientModule } from "./recipient/recipient.module";
     RecipientSocialModule,
     SocialMediaModule,
     RecipientModule,
+    AdminModule,
   ],
   controllers: [],
   providers: [],

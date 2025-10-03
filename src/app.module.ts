@@ -6,6 +6,10 @@ import { RecipientSocialModule } from "./recipient-social/recipient-social.modul
 import { SocialMediaModule } from "./social-media/social-media.module";
 import { RecipientModule } from "./recipient/recipient.module";
 import { AdminModule } from './admin/admin.module';
+import { CategoryModule } from './category/category.module';
+import { ShopModule } from './shop/shop.module';
+import { UserModule } from './user/user.module';
+import { OrderModule } from './order/order.module';
 
 @Module({
   imports: [
@@ -28,6 +32,10 @@ import { AdminModule } from './admin/admin.module';
     SocialMediaModule,
     RecipientModule,
     AdminModule,
+    CategoryModule,
+    ShopModule,
+    UserModule,
+    OrderModule,
   ],
   controllers: [],
   providers: [],

@@ -1,14 +1,8 @@
-import {
-  Column,
-  DataType,
-  ForeignKey,
-  HasMany,
-  Model,
-  Table,
-} from "sequelize-typescript";
-import { Recipient } from "../../recipient/models/recipient.model";
-import { Category } from "../../category/model/category.model";
-import { Order } from "../../order/model/order.model";
+import { BelongsToMany, Column, DataType, ForeignKey, HasMany, Model, Table } from 'sequelize-typescript';
+import { Recipient } from '../../recipient/models/recipient.model';
+import { Category } from '../../category/model/category.model';
+import { Order } from '../../order/model/order.model';
+import { User } from '../../user/models/user.model';
 
 interface IShopCreationAttr {
   name: string;
@@ -19,7 +13,7 @@ interface IShopCreationAttr {
   category_id: number;
   description: string;
 }
-@Table({ tableName: "shop" })
+@Table({ tableName: 'shop' })
 export class Shop extends Model<Shop, IShopCreationAttr> {
   @Column({
     type: DataType.INTEGER,
@@ -34,7 +28,7 @@ export class Shop extends Model<Shop, IShopCreationAttr> {
   })
   declare name: string;
 
-  @Column({
+    @Column({
     type: DataType.INTEGER,
     allowNull: false,
   })
@@ -66,6 +60,9 @@ export class Shop extends Model<Shop, IShopCreationAttr> {
   @Column({ type: DataType.INTEGER, allowNull: false })
   declare category_id: number;
 
-  @HasMany(() => Order)
-  orders: Order[];
+    @HasMany(() => Order)
+    orders: Order[];
+
+    @BelongsToMany(() => User, () => Order)
+    users: User
 }

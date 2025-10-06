@@ -1,13 +1,14 @@
 import {
   BelongsTo,
+  BelongsToMany,
   Column,
   DataType,
   ForeignKey,
   Model,
   Table,
-} from "sequelize-typescript";
-import { Recipient } from "../../recipient/models/recipient.model";
-import { SocialMedia } from "../../social-media/models/social-media.model";
+} from 'sequelize-typescript';
+import { Recipient } from '../../recipient/models/recipient.model';
+import { SocialMedia } from '../../social-media/models/social-media.model';
 
 interface IRecipientSocialCreationAttr {
   recipient_id: number;
@@ -15,7 +16,7 @@ interface IRecipientSocialCreationAttr {
   social_url: string;
 }
 
-@Table({ tableName: "recipient_socials", timestamps: false })
+@Table({ tableName: 'recipient_socials', timestamps: false })
 export class RecipientSocial extends Model<
   RecipientSocial,
   IRecipientSocialCreationAttr
@@ -43,4 +44,5 @@ export class RecipientSocial extends Model<
 
   @BelongsTo(() => SocialMedia)
   socialMedia: SocialMedia;
+
 }

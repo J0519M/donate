@@ -1,12 +1,5 @@
-import {
-  Table,
-  Model,
-  Column,
-  DataType,
-  BelongsTo,
-  ForeignKey,
-} from "sequelize-typescript";
-import { Recipient } from "../../recipient/models/recipient.model";
+import { Table, Model, Column, DataType, BelongsTo, ForeignKey } from 'sequelize-typescript';
+import { Recipient } from '../../recipient/models/recipient.model';
 
 interface ICardsCreationAttr {
   card_type: string;
@@ -15,7 +8,7 @@ interface ICardsCreationAttr {
   expiry_date: string;
 }
 
-@Table({ tableName: "cards" })
+@Table({ tableName: 'cards' })
 export class Card extends Model<Card, ICardsCreationAttr> {
   @Column({
     type: DataType.INTEGER,
@@ -45,7 +38,7 @@ export class Card extends Model<Card, ICardsCreationAttr> {
   @ForeignKey(() => Recipient)
   @Column({
     type: DataType.INTEGER,
-    onDelete: "CASCADE",
+    onDelete: 'CASCADE',
   })
   declare recipient_id: number;
 

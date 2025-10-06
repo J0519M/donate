@@ -1,4 +1,4 @@
-import { Table, Column, DataType, Model } from "sequelize-typescript";
+import { Table, Column, DataType, Model } from 'sequelize-typescript';
 
 interface IAdminCreationAttr {
   full_name: string;
@@ -9,14 +9,14 @@ interface IAdminCreationAttr {
   token?: string;
 }
 
-@Table({ tableName: "admin" })
+@Table({ tableName: 'admin' })
 export class Admin extends Model<Admin, IAdminCreationAttr> {
   @Column({
     type: DataType.SMALLINT,
     autoIncrement: true,
     primaryKey: true,
   })
-  declare id: number;
+   declare id: number;
 
   @Column({
     type: DataType.STRING,
@@ -29,7 +29,7 @@ export class Admin extends Model<Admin, IAdminCreationAttr> {
     unique: true,
     allowNull: false,
   })
-  declare email: string;
+   declare email: string;
 
   @Column({
     type: DataType.STRING,
@@ -47,11 +47,11 @@ export class Admin extends Model<Admin, IAdminCreationAttr> {
     type: DataType.BOOLEAN,
     defaultValue: true,
   })
-  declare is_active: boolean;
+   declare is_active: boolean;
 
   @Column({
     type: DataType.STRING,
     allowNull: true,
   })
-  declare token: string;
+   declare token: string;
 }

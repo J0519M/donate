@@ -5,14 +5,14 @@ import {
   HasMany,
   Model,
   Table,
-} from "sequelize-typescript";
-import { Shop } from "../../shop/model/shop.model";
+} from 'sequelize-typescript';
+import { Shop } from '../../shop/model/shop.model';
 
 interface ICategoryCreationAttr {
   name: string;
 }
 
-@Table({ tableName: "category" })
+@Table({ tableName: 'category' })
 export class Category extends Model<Category, ICategoryCreationAttr> {
   @Column({
     type: DataType.INTEGER,

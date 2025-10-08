@@ -1,10 +1,10 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { CreateRecipientSocialDto } from './dto/create-recipient-social.dto';
-import { UpdateRecipientSocialDto } from './dto/update-recipient-social.dto';
-import { InjectModel } from '@nestjs/sequelize';
-import { RecipientSocial } from './models/recipient-social.model';
-import { SocialMedia } from '../social-media/models/social-media.model';
-import { Recipient } from '../recipient/models/recipient.model';
+import { Injectable, NotFoundException } from "@nestjs/common";
+import { CreateRecipientSocialDto } from "./dto/create-recipient-social.dto";
+import { UpdateRecipientSocialDto } from "./dto/update-recipient-social.dto";
+import { InjectModel } from "@nestjs/sequelize";
+import { RecipientSocial } from "./models/recipient-social.model";
+import { SocialMedia } from "../social-media/models/social-media.model";
+import { Recipient } from "../recipient/models/recipient.model";
 
 @Injectable()
 export class RecipientSocialService {
@@ -13,26 +13,26 @@ export class RecipientSocialService {
     private readonly recipientSocialModel: typeof RecipientSocial,
     @InjectModel(SocialMedia)
     private readonly socialMediaModel: typeof SocialMedia,
-    @InjectModel(Recipient) private readonly recipientModel: typeof Recipient,
+    @InjectModel(Recipient) private readonly recipientModel: typeof Recipient
   ) {}
 
   async create(
-    CreateRecipientSocialDto: CreateRecipientSocialDto,
+    CreateRecipientSocialDto: CreateRecipientSocialDto
   ): Promise<RecipientSocial> {
     const { recipient_id, social_id } = CreateRecipientSocialDto;
 
     if (!recipient_id || !social_id) {
-      throw new NotFoundException('Barchasini kiriting');
+      throw new NotFoundException("Barchasini kiriting");
     }
 
     const recipientModel = await this.recipientModel.findByPk(recipient_id);
     if (!recipientModel) {
-      throw new NotFoundException('Bunday recipient mavjud emas');
+      throw new NotFoundException("Bunday recipient mavjud emas");
     }
 
     const socialMediaModel = await this.socialMediaModel.findByPk(social_id);
     if (!socialMediaModel) {
-      throw new NotFoundException('bunday socialMedia mavjud emas');
+      throw new NotFoundException("bunday socialMedia mavjud emas");
     }
 
     return this.recipientSocialModel.create(CreateRecipientSocialDto);
@@ -47,7 +47,7 @@ export class RecipientSocialService {
       include: { all: true },
     });
     if (!recipientSocial) {
-      throw new NotFoundException('RecipientSocial not found');
+      throw new NotFoundException("RecipientSocial not found");
     }
 
     return recipientSocial;
@@ -56,12 +56,12 @@ export class RecipientSocialService {
   async update(id: number, UpdateRecipientSocialDto: UpdateRecipientSocialDto) {
     const recipientSocial = await this.recipientSocialModel.findByPk(id);
     if (!recipientSocial) {
-      throw new NotFoundException('RecipientSocial not found');
+      throw new NotFoundException("RecipientSocial not found");
     }
 
     const recipient_social = await this.recipientSocialModel.update(
       UpdateRecipientSocialDto,
-      { where: { id }, returning: true },
+      { where: { id }, returning: true }
     );
     return recipient_social[1][0];
   }
@@ -71,7 +71,7 @@ export class RecipientSocialService {
       where: { id },
     });
     if (!recipientSocial) {
-      return { message: 'Bunday RecipientSocial mavjud emas' };
+      return { message: "Bunday RecipientSocial mavjud emas" };
     }
     return { message: "RecipientSocial o'chirildi", id };
   }

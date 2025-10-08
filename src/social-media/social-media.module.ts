@@ -1,10 +1,9 @@
-import { Module } from '@nestjs/common';
-import { SocialMediaService } from './social-media.service';
-import { SocialMediaController } from './social-media.controller';
-import { SequelizeModule } from '@nestjs/sequelize';
-import { SocialMedia } from './models/social-media.model';
-import { RecipientSocial } from '../recipient-social/models/recipient-social.model';
-
+import { Module } from "@nestjs/common";
+import { SocialMediaService } from "./social-media.service";
+import { SocialMediaController } from "./social-media.controller";
+import { SequelizeModule } from "@nestjs/sequelize";
+import { SocialMedia } from "./models/social-media.model";
+import { RecipientSocial } from "../recipient-social/models/recipient-social.model";
 
 @Module({
   imports: [SequelizeModule.forFeature([SocialMedia, RecipientSocial])],

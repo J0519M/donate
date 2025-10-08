@@ -1,7 +1,14 @@
-import { BelongsTo, Column, DataType, ForeignKey, Model, Table } from 'sequelize-typescript';
-import { User } from '../../user/models/user.model';
-import { Donate } from '../../donate/models/donate.model';
-import { Order } from '../../order/model/order.model';
+import {
+  BelongsTo,
+  Column,
+  DataType,
+  ForeignKey,
+  Model,
+  Table,
+} from "sequelize-typescript";
+import { User } from "../../user/models/user.model";
+import { Donate } from "../../donate/models/donate.model";
+import { Order } from "../../order/model/order.model";
 
 interface IPaymentCreationAttr {
   user_id: number;
@@ -13,7 +20,7 @@ interface IPaymentCreationAttr {
   payment_date: Date;
 }
 
-@Table({ tableName: 'payment' })
+@Table({ tableName: "payment" })
 export class Payment extends Model<Payment, IPaymentCreationAttr> {
   @Column({
     type: DataType.INTEGER,

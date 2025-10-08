@@ -2,11 +2,11 @@ import {
   BadRequestException,
   Injectable,
   NotFoundException,
-} from '@nestjs/common';
-import { InjectModel } from '@nestjs/sequelize';
-import { Donate } from './models/donate.model';
-import { CreateDonateDto } from './dto/create-donate.dto';
-import { UpdateDonateDto } from './dto/update-donate.dto';
+} from "@nestjs/common";
+import { InjectModel } from "@nestjs/sequelize";
+import { Donate } from "./models/donate.model";
+import { CreateDonateDto } from "./dto/create-donate.dto";
+import { UpdateDonateDto } from "./dto/update-donate.dto";
 
 @Injectable()
 export class DonateService {
@@ -17,7 +17,7 @@ export class DonateService {
       createDonateDto;
 
     if (!user_id || !recipient_id || !notification) {
-      throw new BadRequestException('Barcha maydonlarni to‘ldiring');
+      throw new BadRequestException("Barcha maydonlarni to‘ldiring");
     }
 
     return this.donateModel.create(createDonateDto);
@@ -31,13 +31,13 @@ export class DonateService {
     const donate = await this.donateModel.findByPk(id, {
       include: { all: true },
     });
-    if (!donate) throw new NotFoundException('Donate topilmadi');
+    if (!donate) throw new NotFoundException("Donate topilmadi");
     return donate;
   }
 
   async update(id: number, updateDonateDto: UpdateDonateDto): Promise<Donate> {
     const donate = await this.donateModel.findByPk(id);
-    if (!donate) throw new NotFoundException('Donate topilmadi');
+    if (!donate) throw new NotFoundException("Donate topilmadi");
 
     const [_, updated] = await this.donateModel.update(updateDonateDto, {
       where: { id },
@@ -48,7 +48,7 @@ export class DonateService {
 
   async remove(id: number) {
     const delCount = await this.donateModel.destroy({ where: { id } });
-    if (!delCount) throw new NotFoundException('Donate topilmadi');
-    return { message: 'Donate o‘chirildi', id };
+    if (!delCount) throw new NotFoundException("Donate topilmadi");
+    return { message: "Donate o‘chirildi", id };
   }
 }

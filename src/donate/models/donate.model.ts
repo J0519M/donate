@@ -7,10 +7,10 @@ import {
   HasMany,
   Model,
   Table,
-} from 'sequelize-typescript';
-import { User } from '../../user/models/user.model';
-import { Recipient } from '../../recipient/models/recipient.model';
-import { Payment } from '../../payments/models/payment.model';
+} from "sequelize-typescript";
+import { User } from "../../user/models/user.model";
+import { Recipient } from "../../recipient/models/recipient.model";
+import { Payment } from "../../payments/models/payment.model";
 
 interface IDonateCreationAttr {
   recipient_id: number;
@@ -18,7 +18,7 @@ interface IDonateCreationAttr {
   notification: string;
   is_AnonimPay: boolean;
 }
-@Table({ tableName: 'donate' })
+@Table({ tableName: "donate" })
 export class Donate extends Model<Donate, IDonateCreationAttr> {
   @Column({
     type: DataType.INTEGER,

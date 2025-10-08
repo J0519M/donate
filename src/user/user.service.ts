@@ -2,32 +2,32 @@ import {
   BadRequestException,
   Injectable,
   NotFoundException,
-} from '@nestjs/common';
-import { InjectModel } from '@nestjs/sequelize';
-import { User } from './models/user.model';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
+} from "@nestjs/common";
+import { InjectModel } from "@nestjs/sequelize";
+import { User } from "./models/user.model";
+import { CreateUserDto } from "./dto/create-user.dto";
+import { UpdateUserDto } from "./dto/update-user.dto";
 
 @Injectable()
 export class UserService {
   constructor(@InjectModel(User) private userModel: typeof User) {}
 
   async create(createUserDto: CreateUserDto): Promise<User> {
-    const { full_name, password, email, card_number, is_active } = createUserDto;
+    const { full_name, password, email, card_number, is_active } =
+      createUserDto;
 
     if (!full_name || !password || !is_active || !email || !card_number) {
-      throw new BadRequestException('Iltimos barcha maydonlarni kiriting');
+      throw new BadRequestException("Iltimos barcha maydonlarni kiriting");
     }
 
     const existsEmail = await this.userModel.findOne({ where: { email } });
     if (existsEmail) {
-      throw new BadRequestException('Bunday email mavjud');
+      throw new BadRequestException("Bunday email mavjud");
     }
-
 
     const existsCard = await this.userModel.findOne({ where: { card_number } });
     if (existsCard) {
-      throw new BadRequestException('Bunday karta raqami mavjud');
+      throw new BadRequestException("Bunday karta raqami mavjud");
     }
 
     return this.userModel.create(createUserDto);
@@ -40,7 +40,7 @@ export class UserService {
   async findOne(id: number): Promise<User> {
     const user = await this.userModel.findByPk(id, { include: { all: true } });
     if (!user) {
-      throw new NotFoundException('User topilmadi');
+      throw new NotFoundException("User topilmadi");
     }
     return user;
   }
@@ -48,7 +48,7 @@ export class UserService {
   async update(id: number, updateUserDto: UpdateUserDto): Promise<User> {
     const user = await this.userModel.findByPk(id);
     if (!user) {
-      throw new NotFoundException('User topilmadi');
+      throw new NotFoundException("User topilmadi");
     }
 
     if (updateUserDto.email) {
@@ -56,7 +56,7 @@ export class UserService {
         where: { email: updateUserDto.email },
       });
       if (existsEmail && existsEmail.id !== id) {
-        throw new BadRequestException('Bunday email allaqachon band');
+        throw new BadRequestException("Bunday email allaqachon band");
       }
     }
 
@@ -65,7 +65,7 @@ export class UserService {
         where: { card_number: updateUserDto.card_number },
       });
       if (existsCard && existsCard.id !== id) {
-        throw new BadRequestException('Bunday karta raqami band');
+        throw new BadRequestException("Bunday karta raqami band");
       }
     }
 
@@ -80,8 +80,8 @@ export class UserService {
   async remove(id: number) {
     const delCount = await this.userModel.destroy({ where: { id } });
     if (!delCount) {
-      throw new NotFoundException('User topilmadi');
+      throw new NotFoundException("User topilmadi");
     }
-    return { message: 'User o‘chirildi', id };
+    return { message: "User o‘chirildi", id };
   }
 }

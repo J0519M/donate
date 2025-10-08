@@ -5,15 +5,15 @@ import {
   HasMany,
   Model,
   Table,
-} from 'sequelize-typescript';
-import { RecipientSocial } from '../../recipient-social/models/recipient-social.model';
-import { Recipient } from '../../recipient/models/recipient.model';
+} from "sequelize-typescript";
+import { RecipientSocial } from "../../recipient-social/models/recipient-social.model";
+import { Recipient } from "../../recipient/models/recipient.model";
 
 interface ISocialMeidaCreationAttr {
   social_media: string;
   icon_url: string;
 }
-@Table({ tableName: 'social_media', timestamps: false })
+@Table({ tableName: "social_media", timestamps: false })
 export class SocialMedia extends Model<SocialMedia, ISocialMeidaCreationAttr> {
   @Column({
     type: DataType.INTEGER,

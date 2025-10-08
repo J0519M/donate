@@ -2,11 +2,11 @@ import {
   BadRequestException,
   Injectable,
   NotFoundException,
-} from '@nestjs/common';
-import { InjectModel } from '@nestjs/sequelize';
-import { Payment } from './models/payment.model';
-import { CreatePaymentDto } from './dto/create-payment.dto';
-import { UpdatePaymentDto } from './dto/update-payment.dto';
+} from "@nestjs/common";
+import { InjectModel } from "@nestjs/sequelize";
+import { Payment } from "./models/payment.model";
+import { CreatePaymentDto } from "./dto/create-payment.dto";
+import { UpdatePaymentDto } from "./dto/update-payment.dto";
 
 @Injectable()
 export class PaymentService {
@@ -31,7 +31,7 @@ export class PaymentService {
       !status ||
       !amount
     ) {
-      throw new BadRequestException('Barcha maydonlarni to‘ldiring');
+      throw new BadRequestException("Barcha maydonlarni to‘ldiring");
     }
 
     return this.paymentModel.create(createPaymentDto);
@@ -45,16 +45,16 @@ export class PaymentService {
     const payment = await this.paymentModel.findByPk(id, {
       include: { all: true },
     });
-    if (!payment) throw new NotFoundException('Payment topilmadi');
+    if (!payment) throw new NotFoundException("Payment topilmadi");
     return payment;
   }
 
   async update(
     id: number,
-    updatePaymentDto: UpdatePaymentDto,
+    updatePaymentDto: UpdatePaymentDto
   ): Promise<Payment> {
     const payment = await this.paymentModel.findByPk(id);
-    if (!payment) throw new NotFoundException('Payment topilmadi');
+    if (!payment) throw new NotFoundException("Payment topilmadi");
 
     const [_, updated] = await this.paymentModel.update(updatePaymentDto, {
       where: { id },
@@ -65,7 +65,7 @@ export class PaymentService {
 
   async remove(id: number) {
     const delCount = await this.paymentModel.destroy({ where: { id } });
-    if (!delCount) throw new NotFoundException('Payment topilmadi');
-    return { message: 'Payment o‘chirildi', id };
+    if (!delCount) throw new NotFoundException("Payment topilmadi");
+    return { message: "Payment o‘chirildi", id };
   }
 }

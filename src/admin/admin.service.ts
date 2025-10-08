@@ -2,11 +2,11 @@ import {
   BadRequestException,
   Injectable,
   NotFoundException,
-} from '@nestjs/common';
-import { InjectModel } from '@nestjs/sequelize';
-import { Admin } from './models/admin.model';
-import { CreateAdminDto } from './dto/create-admin.dto';
-import { UpdateAdminDto } from './dto/update-admin.dto';
+} from "@nestjs/common";
+import { InjectModel } from "@nestjs/sequelize";
+import { Admin } from "./models/admin.model";
+import { CreateAdminDto } from "./dto/create-admin.dto";
+import { UpdateAdminDto } from "./dto/update-admin.dto";
 
 @Injectable()
 export class AdminService {
@@ -17,7 +17,7 @@ export class AdminService {
 
     const existsEmail = await this.adminModel.findOne({ where: { email } });
     if (existsEmail) {
-      throw new BadRequestException('Bunday email mavjud');
+      throw new BadRequestException("Bunday email mavjud");
     }
 
     return this.adminModel.create(createAdminDto);
@@ -30,7 +30,7 @@ export class AdminService {
   async findOne(id: number): Promise<Admin> {
     const admin = await this.adminModel.findByPk(id);
     if (!admin) {
-      throw new NotFoundException('Admin topilmadi');
+      throw new NotFoundException("Admin topilmadi");
     }
     return admin;
   }
@@ -38,7 +38,7 @@ export class AdminService {
   async update(id: number, updateAdminDto: UpdateAdminDto): Promise<Admin> {
     const admin = await this.adminModel.findByPk(id);
     if (!admin) {
-      throw new NotFoundException('Admin topilmadi');
+      throw new NotFoundException("Admin topilmadi");
     }
 
     if (updateAdminDto.email) {
@@ -46,7 +46,7 @@ export class AdminService {
         where: { email: updateAdminDto.email },
       });
       if (existsEmail && existsEmail.id !== id) {
-        throw new BadRequestException('Bu email band');
+        throw new BadRequestException("Bu email band");
       }
     }
 
@@ -61,8 +61,8 @@ export class AdminService {
   async remove(id: number) {
     const delCount = await this.adminModel.destroy({ where: { id } });
     if (!delCount) {
-      throw new NotFoundException('Bunday admin mavjud emas');
+      throw new NotFoundException("Bunday admin mavjud emas");
     }
-    return { message: 'Admin o‘chirildi', id };
+    return { message: "Admin o‘chirildi", id };
   }
 }

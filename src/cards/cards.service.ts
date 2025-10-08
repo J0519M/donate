@@ -1,27 +1,31 @@
-import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
-import { CreateCardDto } from './dto/create-card.dto';
-import { UpdateCardDto } from './dto/update-card.dto';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from "@nestjs/common";
+import { CreateCardDto } from "./dto/create-card.dto";
+import { UpdateCardDto } from "./dto/update-card.dto";
 import { InjectModel } from "@nestjs/sequelize";
-import { Card } from './models/card.model';
-import { Recipient } from '../recipient/models/recipient.model';
+import { Card } from "./models/card.model";
+import { Recipient } from "../recipient/models/recipient.model";
 
 @Injectable()
 export class CardsService {
   constructor(
     @InjectModel(Card) private cardModel: typeof Card,
-    @InjectModel(Recipient) private recipientModel: typeof Recipient,
+    @InjectModel(Recipient) private recipientModel: typeof Recipient
   ) {}
 
   async create(createCardDto: CreateCardDto): Promise<Card> {
     const { card_type, card_number, recipient_id, expiry_date } = createCardDto;
 
     if (!card_type || !card_number || !recipient_id || !expiry_date) {
-      throw new BadRequestException('Iltimos, barcha maydonlarni kiriting');
+      throw new BadRequestException("Iltimos, barcha maydonlarni kiriting");
     }
 
     const recipient = await this.recipientModel.findByPk(recipient_id);
     if (!recipient) {
-      throw new NotFoundException('Bunday recipient mavjud emas');
+      throw new NotFoundException("Bunday recipient mavjud emas");
     }
     return this.cardModel.create(createCardDto);
   }
@@ -35,7 +39,7 @@ export class CardsService {
       include: { all: true },
     });
     if (!cardId) {
-      throw new NotFoundException('Card not found');
+      throw new NotFoundException("Card not found");
     }
 
     return cardId;
@@ -46,7 +50,7 @@ export class CardsService {
 
     const cardId = await this.cardModel.findByPk(id);
     if (!cardId) {
-      throw new BadRequestException('Card not found');
+      throw new BadRequestException("Card not found");
     }
 
     const card = await this.cardModel.update(UpdateCardDto, {
@@ -59,7 +63,7 @@ export class CardsService {
   async remove(id: number) {
     const deleted = await this.cardModel.destroy({ where: { id } });
     if (!deleted) {
-      return { message: 'Bunday card mavjud emas' };
+      return { message: "Bunday card mavjud emas" };
     }
     return { message: "Card O'chirildi " };
   }

@@ -5,11 +5,11 @@ import {
   HasMany,
   Model,
   Table,
-} from 'sequelize-typescript';
-import { Order } from '../../order/model/order.model';
-import { Shop } from '../../shop/model/shop.model';
-import { Donate } from '../../donate/models/donate.model';
-import { Payment } from '../../payments/models/payment.model';
+} from "sequelize-typescript";
+import { Order } from "../../order/model/order.model";
+import { Shop } from "../../shop/model/shop.model";
+import { Donate } from "../../donate/models/donate.model";
+import { Payment } from "../../payments/models/payment.model";
 
 interface IUserCreationAttr {
   full_name: string;
@@ -19,7 +19,7 @@ interface IUserCreationAttr {
   is_active?: boolean;
 }
 
-@Table({ tableName: 'users' }) // <-- Dekorator
+@Table({ tableName: "users" }) // <-- Dekorator
 export class User extends Model<User, IUserCreationAttr> {
   @Column({
     type: DataType.INTEGER,

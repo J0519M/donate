@@ -7,13 +7,13 @@ import {
   DataType,
   HasMany,
   BelongsToMany,
-} from 'sequelize-typescript';
-import { Card } from '../../cards/models/card.model';
-import { Shop } from '../../shop/model/shop.model';
-import { SocialMedia } from '../../social-media/models/social-media.model';
-import { RecipientSocial } from '../../recipient-social/models/recipient-social.model';
-import { User } from '../../user/models/user.model';
-import { Donate } from '../../donate/models/donate.model';
+} from "sequelize-typescript";
+import { Card } from "../../cards/models/card.model";
+import { Shop } from "../../shop/model/shop.model";
+import { SocialMedia } from "../../social-media/models/social-media.model";
+import { RecipientSocial } from "../../recipient-social/models/recipient-social.model";
+import { User } from "../../user/models/user.model";
+import { Donate } from "../../donate/models/donate.model";
 
 interface IRecipientCreationAttr {
   name: string;
@@ -23,7 +23,7 @@ interface IRecipientCreationAttr {
   address: string;
 }
 
-@Table({ tableName: 'recipients' })
+@Table({ tableName: "recipients" })
 export class Recipient extends Model<Recipient, IRecipientCreationAttr> {
   @PrimaryKey
   @AutoIncrement

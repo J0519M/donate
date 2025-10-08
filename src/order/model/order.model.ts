@@ -6,10 +6,10 @@ import {
   HasMany,
   Model,
   Table,
-} from 'sequelize-typescript';
-import { User } from '../../user/models/user.model';
-import { Shop } from '../../shop/model/shop.model';
-import { Payment } from '../../payments/models/payment.model';
+} from "sequelize-typescript";
+import { User } from "../../user/models/user.model";
+import { Shop } from "../../shop/model/shop.model";
+import { Payment } from "../../payments/models/payment.model";
 
 interface IOrderCreationAttr {
   location: string;
@@ -19,7 +19,7 @@ interface IOrderCreationAttr {
   quanity: number;
 }
 
-@Table({ tableName: 'order' })
+@Table({ tableName: "order" })
 export class Order extends Model<Order, IOrderCreationAttr> {
   @Column({
     type: DataType.INTEGER,
